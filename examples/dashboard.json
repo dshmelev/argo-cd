@@ -1558,10 +1558,10 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}",
+              "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-application-controller-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{namespace}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             }
           ],
@@ -1621,19 +1621,13 @@
           "hiddenSeries": false,
           "id": 108,
           "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": true,
+            "avg": false,
+            "current": false,
+            "max": false,
             "min": false,
-            "rightSide": true,
-            "show": true,
-            "sort": "avg",
-            "sortDesc": true,
+            "show": false,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 1,
@@ -1657,10 +1651,10 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "irate(process_cpu_seconds_total{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}[1m])",
+              "expr": "irate(process_cpu_seconds_total{job=\"argocd-application-controller-metrics\",namespace=~\"$namespace\"}[1m])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{namespace}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             }
           ],
@@ -1757,10 +1751,10 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "go_goroutines{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}",
+              "expr": "go_goroutines{job=\"argocd-application-controller-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{namespace}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             }
           ],
@@ -1883,7 +1877,7 @@
               "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-applicationset-controller-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{namespace}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             }
           ],
@@ -1943,19 +1937,13 @@
           "hiddenSeries": false,
           "id": 108,
           "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": true,
+            "avg": false,
+            "current": false,
+            "max": false,
             "min": false,
-            "rightSide": true,
-            "show": true,
-            "sort": "avg",
-            "sortDesc": true,
+            "show": false,
             "total": false,
-            "values": true
+            "values": false
           },
           "lines": true,
           "linewidth": 1,
@@ -1982,7 +1970,7 @@
               "expr": "irate(process_cpu_seconds_total{job=\"argocd-applicationset-controller-metrics\",namespace=~\"$namespace\"}[1m])",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{namespace}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             }
           ],
@@ -2082,7 +2070,7 @@
               "expr": "go_goroutines{job=\"argocd-applicationset-controller-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{namespace}}",
+              "legendFormat": "{{pod}}",
               "refId": "A"
             }
           ],
@@ -2892,7 +2880,7 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}",
+              "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-repo-server-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{pod}}",
@@ -2901,7 +2889,7 @@
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Memory Used",
+          "title": "Memory Usage",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -2916,6 +2904,92 @@
           "yaxes": [
             {
               "format": "bytes",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": [],
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "hiddenSeries": false,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "options": {
+            "alertThreshold": true
+          },
+          "paceLength": 10,
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "irate(process_cpu_seconds_total{job=\"argocd-repo-server-metrics\",namespace=~\"$namespace\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "CPU Usage",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "none",
               "logBase": 1,
               "show": true
             },
@@ -2977,7 +3051,7 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "go_goroutines{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}",
+              "expr": "go_goroutines{job=\"argocd-repo-server-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{pod}}",
@@ -3095,7 +3169,7 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-repo-server-metrics\",namespace=~\"$namespace\"}",
+              "expr": "go_memstats_heap_alloc_bytes{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{pod}}",
@@ -3104,7 +3178,7 @@
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Memory Used",
+          "title": "Memory Usage",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -3121,6 +3195,100 @@
               "format": "bytes",
               "logBase": 1,
               "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "uid": "$datasource"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": [],
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 16
+          },
+          "hiddenSeries": false,
+          "id": 108,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "options": {
+            "alertThreshold": true
+          },
+          "paceLength": 10,
+          "percentage": false,
+          "pluginVersion": "10.3.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "uid": "$datasource"
+              },
+              "expr": "irate(process_cpu_seconds_total{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "CPU Usage",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 1,
+              "format": "none",
+              "logBase": 1,
               "show": true
             },
             {
@@ -3188,7 +3356,7 @@
               "datasource": {
                 "uid": "$datasource"
               },
-              "expr": "go_goroutines{job=\"argocd-repo-server-metrics\",namespace=~\"$namespace\"}",
+              "expr": "go_goroutines{job=\"argocd-server-metrics\",namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{pod}}",
